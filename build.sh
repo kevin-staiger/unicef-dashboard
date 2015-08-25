@@ -37,7 +37,7 @@ echo '*.ipr' >> exclude
 echo '.gitignore' >> exclude
 echo 'exclude' >> exclude
 
-BUNDLE=cloudtoolbox-web.tar
+BUNDLE=kms-encrypt-web.tar
 tar cvf ${BUNDLE} -X exclude *
 
 
