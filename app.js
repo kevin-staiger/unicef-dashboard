@@ -32,7 +32,7 @@ app.post('/api/encrypt', function (req, res, next) {
   kms.encrypt(params, function(err, data) {
     if (err) console.log(err, err.stack);
     // else console.log(data.CiphertextBlob.toString('utf8'))
-    else res.json({cipher: data.CiphertextBlob.toString('utf8')});
+    else res.json({cipher: data.CiphertextBlob.toString('base64')});
   }) 
 })
 
