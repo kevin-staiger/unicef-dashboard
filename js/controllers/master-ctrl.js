@@ -1,12 +1,11 @@
-/**
- * Master Controller
- */
+/* global angular, $ */
+
+'use strict';
 
 angular.module('RDash')
     .controller('MasterCtrl', ['$scope', '$http', '$cookieStore', MasterCtrl]);
 
-function MasterCtrl($scope, $cookieStore) {
-    console.log('loaded')
+function MasterCtrl($scope, $http, $cookieStore) {
     /**
      * Sidebar Toggle & Cookie Control
      */
@@ -18,15 +17,19 @@ function MasterCtrl($scope, $cookieStore) {
             method: "post",
             url: "/api/encrypt",
             data: $.param({
-              encryptionData: $scope.encryption.data,
-              jobName: $scope.encryption.env,
+              encryptionData: $scope.encryption.Data,
+              environment: $scope.encryption.env,
+              region: $scope.encryption.region,
             }),
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
             }
           })
-            .success(function (job) { window.location = job.url; })
-                    .error(function(response) { alert(response); });
+            .success(function (data) { 
+              console.log(data.cipher)
+              $scope.cipher = data.cipher 
+            })
+            .error(function(response) { alert(response); });
         } else {
           alert('Not Submitted, Error Filling Out Form');
         }
