@@ -11,12 +11,30 @@ var AWS = require('aws-sdk')
 var _ = require('underscore');
 
 var app = express();
-
+AWS.config.loadFromPath('./config.json');
 
 app.use(
   "/", 
   express.static(__dirname) 
 );
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({}));
+
+app.post('/api/encrypt', function (req, res, next) {
+
+  AWS.config.update({region: req.body.region});
+  console.log(AWS.config)
+  var params = {
+    KeyId: 'f394764b-4557-4e55-8725-719a07f30614',
+    Plaintext: req.body.encryptionData
+  }
+  var kms = new AWS.KMS({apiVersion: '2014-11-01'});
+  kms.encrypt(params, function(err, data) {
+    if (err) console.log(err, err.stack);
+    // else console.log(data.CiphertextBlob.toString('utf8'))
+    else res.json({cipher: data.CiphertextBlob.toString('base64')});
+  }) 
+})
 
 //load config
 var config = require('./config/config')
@@ -52,8 +70,7 @@ logger.format('access', '[:date] ip=:remote-addr mtd=:method url=:url http=:http
 app.use(logger('access', {stream: accessLogStream, buffer: true}));
 
 //configure
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+
 app.use(cookieParser());
 app.disable('etag')
 app.use(cacheResponseDirective());
