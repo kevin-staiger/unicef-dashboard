@@ -28,7 +28,8 @@
     "gulp-concat": "^2.4.1",
     "gulp-less": "^1.3.6",
     "gulp-rename": "^1.2.0",
-    "gulp-minify-html": "^0.1.6"
+    "gulp-minify-html": "^0.1.6",
+    "underscore": "^1.8.2"
   },
   "description": "kms-encrypt-web ======================",
   "main": "app.js",
