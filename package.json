@@ -1,5 +1,5 @@
 {
-  "name": "kms-encrypt-web",
+  "name": "cloudtoolbox-web",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -45,7 +45,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://ewegithub.sb.karmalab.net/EWE/kms-encrypt-web.git"
+    "url": "https://ewegithub.sb.karmalab.net/EWE/cloudtoolbox-web.git"
   },
   "author": "",
   "license": "ISC"
