@@ -11,7 +11,13 @@ var AWS = require('aws-sdk')
 var _ = require('underscore');
 
 var app = express();
-AWS.config.loadFromPath('./config.json');
+
+fs.exists('./config.json', function (exists){
+  console.log(exists)
+  if (exists == true) {
+    AWS.config.loadFromPath('./config.json');
+  } 
+})
 
 app.use(
   "/", 
